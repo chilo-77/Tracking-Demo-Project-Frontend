@@ -9,35 +9,36 @@ function SubmitDocuments({ setActivePage }) {
   const [message, setMessage] = useState("");
   const [showTrackBtn, setShowTrackBtn] = useState(false);
 
+  // TEMP HANDLER FOR PICKUP SCHEDULING
   const schedulePickup = async () => {
-    const res = await fetch("http://localhost:3000/pickup/schedulePickup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        awb,
-        date,
-        timeWindow: {
-          from: fromTime,
-          to: toTime,
-        },
-      }),
-    });
+    if (!awb || !date || !fromTime || !toTime) {
+      setMessage("Please fill all fields.");
+      return;
+    }
 
-    const data = await res.json();
-    setMessage(data.message);
-
-    // frontend demo ke liye status update
-    localStorage.setItem(
-      "awb",
-      JSON.stringify({
+    // TEMP RESPONSE SIMULATING BACKEND
+    const tempResponse = {
+      message: "Pickup Scheduled Successfully!",
+      awbInfo: {
         trackingNo: awb,
         status: "PICKUP_SCHEDULED",
-      })
-    );
+        date,
+        timeWindow: { from: fromTime, to: toTime },
+        documentsSubmitted: true, // simulate docs submitted by shipper
+      },
+    };
 
+    // Save to localStorage like real backend
+    localStorage.setItem("awb", JSON.stringify(tempResponse.awbInfo));
+
+    setMessage(tempResponse.message);
     setShowTrackBtn(true);
+
+    // Reset form
+    setAwb("");
+    setDate("");
+    setFromTime("");
+    setToTime("");
   };
 
   return (
@@ -48,15 +49,28 @@ function SubmitDocuments({ setActivePage }) {
         <input
           type="text"
           placeholder="Enter AWB"
+          value={awb}
           onChange={(e) => setAwb(e.target.value)}
         />
 
-        <input type="date" onChange={(e) => setDate(e.target.value)} />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
 
         <div className="time-window">
-          <input type="time" onChange={(e) => setFromTime(e.target.value)} />
+          <input
+            type="time"
+            value={fromTime}
+            onChange={(e) => setFromTime(e.target.value)}
+          />
           <span>to</span>
-          <input type="time" onChange={(e) => setToTime(e.target.value)} />
+          <input
+            type="time"
+            value={toTime}
+            onChange={(e) => setToTime(e.target.value)}
+          />
         </div>
 
         <button onClick={schedulePickup}>Schedule Pickup</button>

@@ -9,24 +9,28 @@ function DocumentRequirement({ setActivePage }) {
   const [destination, setDestination] = useState("");
   const [docReq, setDocReq] = useState(null);
 
+  // TEMP HANDLER FOR DOCUMENT REQUIREMENT
   const docRequest = async () => {
-    let url = `http://localhost:3000/documents/documentationReq`;
+    // TEMP RESPONSE SIMULATION
+    const tempDocuments = [
+      { name: "Invoice", required: true },
+      { name: "Packing List", required: true },
+      { name: "Customs Form", required: true },
+      { name: "Insurance", required: false },
+      { name: "Other Document", required: false },
+    ];
 
-    if (searchType === "awb") {
-      url += `?awb=${awb}`;
-    } else {
-      url += `?origin=${origin}&destination=${destination}`;
-    }
+    const tempResponse = {
+      awb: searchType === "awb" ? awb : null,
+      origin: searchType === "manual" ? origin : "N/A",
+      destination: searchType === "manual" ? destination : "N/A",
+      requiredDocuments: tempDocuments,
+    };
 
-    const doc = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const data = await doc.json();
-    setDocReq(data);
+    setDocReq(tempResponse);
   };
 
   return (
@@ -59,6 +63,7 @@ function DocumentRequirement({ setActivePage }) {
             type="text"
             placeholder="Enter AWB..."
             className="input-box"
+            value={awb}
             onChange={(e) => setAwb(e.target.value)}
           />
         ) : (
@@ -67,12 +72,14 @@ function DocumentRequirement({ setActivePage }) {
               type="text"
               placeholder="Enter Origin..."
               className="input-box"
+              value={origin}
               onChange={(e) => setOrigin(e.target.value)}
             />
             <input
               type="text"
               placeholder="Enter Destination..."
               className="input-box"
+              value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
           </>

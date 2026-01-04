@@ -50,94 +50,63 @@ function Generateawb() {
     setPackageData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // TEMPORARY AWB GENERATION HANDLER
   const createAWB = async () => {
-    // const req = await fetch(
-    //   `${process.env.REACT_APP_BACKEND_URL}/awb/createAWB`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify([shipper, consignee, packageData]),
-    //   }
-    // );
+    // TEMP AWB RESPONSE SIMULATING BACKEND
+    const tempAwb = {
+      awbGeneration: {
+        trackingNo: "AWB123456789",
+        status: "CREATED",
+        shipper,
+        consignee,
+        packageData,
+      },
+    };
 
-    const req = await fetch(
-      `http://localhost:3000/awb/createAWB
-`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([shipper, consignee, packageData]),
-      }
-    );
+    // Save to localStorage like real API
+    localStorage.setItem("awb", JSON.stringify(tempAwb.awbGeneration));
 
-    const res = await req.json();
+    // Simulate email sending response
+    const tempEmailResponse = { message: "Email Sent successfully" };
 
-    localStorage.setItem("awb", JSON.stringify(res.awbGeneration));
+    if (
+      tempAwb.awbGeneration.status === "CREATED" &&
+      tempEmailResponse.message === "Email Sent successfully"
+    ) {
+      setAwbStatus("emailShared");
+      alert(`AWB has been generated ${tempAwb.awbGeneration.trackingNo}`);
 
-    if (res.awbGeneration.status === "CREATED") {
-      // const informParties = await fetch(
-      //   `${process.env.REACT_APP_BACKEND_URL}/party/sendEmail`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(JSON.parse(localStorage.getItem("awb"))),
-      //   }
-      // );
+      // Reset form
+      setShipper({
+        shipperName: "",
+        shipperEmail: "",
+        shipperPhone: "",
+        shipperAddressLine1: "",
+        shipperAddressLine2: "",
+        shipperCity: "",
+        shipperCountry: "",
+        shipperPostalCode: "",
+      });
 
-      const informParties = await fetch(
-        `http://localhost:3000/party/sendEmail`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(JSON.parse(localStorage.getItem("awb"))),
-        }
-      );
+      setConsignee({
+        consigneeName: "",
+        consigneeEmail: "",
+        consigneePhone: "",
+        consigneeAddressLine1: "",
+        consigneeAddressLine2: "",
+        consigneeCity: "",
+        consigneeCountry: "",
+        consigneePostalCode: "",
+      });
 
-      const resParties = await informParties.json();
-
-      if (resParties.message === "Email Sent successfully") {
-        setAwbStatus("emailShared");
-        alert(`AWB has been generated ${res.awbGeneration.trackingNo}`);
-
-        setShipper({
-          shipperName: "",
-          shipperEmail: "",
-          shipperPhone: "",
-          shipperAddressLine1: "",
-          shipperAddressLine2: "",
-          shipperCity: "",
-          shipperCountry: "",
-          shipperPostalCode: "",
-        });
-
-        setConsignee({
-          consigneeName: "",
-          consigneeEmail: "",
-          consigneePhone: "",
-          consigneeAddressLine1: "",
-          consigneeAddressLine2: "",
-          consigneeCity: "",
-          consigneeCountry: "",
-          consigneePostalCode: "",
-        });
-
-        setPackageData({
-          weight: "",
-          length: "",
-          width: "",
-          height: "",
-          quantity: "",
-          description: "",
-        });
-      }
+      setPackageData({
+        weight: "",
+        length: "",
+        width: "",
+        height: "",
+        quantity: "",
+        description: "",
+      });
     }
   };
 
