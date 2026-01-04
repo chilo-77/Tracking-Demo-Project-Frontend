@@ -1,0 +1,148 @@
+/* trackAWB.css */
+
+.awb-status-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.awb-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.awb-tracking-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.awb-tracking-box .label {
+  font-weight: 500;
+  color: #555;
+}
+
+.awb-tracking-box input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.awb-tracking-box input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 6px rgba(79, 70, 229, 0.3);
+}
+
+.awb-tracking-box button {
+  padding: 0.6rem 1rem;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.awb-tracking-box button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* Steps styling */
+.awb-status-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.completed {
+  opacity: 1;
+}
+
+.step .dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-top: 5px;
+  flex-shrink: 0;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.step.active .dot {
+  background-color: #4f46e5;
+  transform: scale(1.2);
+}
+
+.step.completed .dot {
+  background-color: #16a34a;
+}
+
+.step-content h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.step-content p {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Vertical line connecting steps */
+.awb-status-steps::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #ddd;
+  z-index: 0;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  padding-left: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .awb-tracking-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .awb-tracking-box button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,100 @@
+/* generateAWB.css */
+
+.generate-awb-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.generate-awb-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.awb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.awb-fieldset {
+  border: 2px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.awb-fieldset legend {
+  padding: 0 10px;
+  font-weight: 600;
+  color: #555;
+}
+
+.awb-fieldset label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.awb-fieldset input,
+.awb-fieldset textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.awb-fieldset input:focus,
+.awb-fieldset textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 6px rgba(79, 70, 229, 0.3);
+}
+
+textarea {
+  resize: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row > div {
+  flex: 1;
+  min-width: 150px;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+}

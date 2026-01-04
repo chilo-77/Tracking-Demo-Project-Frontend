@@ -1,0 +1,132 @@
+/* documentReq.css */
+
+.document-req-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.top-bar h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-container button {
+  padding: 0.6rem 1.2rem;
+  background-color: #f0f0f0;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.2s, transform 0.2s;
+}
+
+.toggle-container button.active {
+  background-color: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.toggle-container button:hover:not(.active) {
+  background-color: #e0e0e0;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.input-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.input-box:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 6px rgba(79, 70, 229, 0.3);
+}
+
+.search-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+}
+
+.results {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.results p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.next-button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #16a34a;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.next-button:hover {
+  background-color: #15803d;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toggle-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-button,
+  .next-button {
+    width: 100%;
+  }
+}
