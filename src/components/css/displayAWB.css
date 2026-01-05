@@ -4,26 +4,33 @@
   grid-template-rows: repeat(2, auto);
   gap: 20px;
   padding: 20px;
+  background-color: #f4f1fa; /* light purple background */
 }
 
 .awb-container > div {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #5a2d82; /* FedEx purple */
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(90, 45, 130, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.awb-container > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(90, 45, 130, 0.25);
 }
 
 .awb-container h2 {
   margin-bottom: 10px;
   font-size: 1.2rem;
-  color: #333;
+  color: #4d148c; /* FedEx main purple */
 }
 
 .awb-container p {
   margin: 4px 0;
   font-size: 0.95rem;
-  color: #555;
+  color: #333;
 }
 
 @media screen and (max-width: 768px) {

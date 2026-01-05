@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./css/generateAWB.css";
+import ProfilePage from "./profilePage"; // Profile page import
 
 function Generateawb() {
   const [awbStatus, setAwbStatus] = useState("");
+  const [showProfile, setShowProfile] = useState(false); // For ProfilePage rendering
 
   const [shipper, setShipper] = useState({
     shipperName: "",
@@ -15,11 +17,6 @@ function Generateawb() {
     shipperPostalCode: "",
   });
 
-  const handleShipperChange = (e) => {
-    const { name, value } = e.target;
-    setShipper((prev) => ({ ...prev, [name]: value }));
-  };
-
   const [consignee, setConsignee] = useState({
     consigneeName: "",
     consigneeEmail: "",
@@ -31,11 +28,6 @@ function Generateawb() {
     consigneePostalCode: "",
   });
 
-  const handleConsigneeChange = (e) => {
-    const { name, value } = e.target;
-    setConsignee((prev) => ({ ...prev, [name]: value }));
-  };
-
   const [packageData, setPackageData] = useState({
     weight: "",
     length: "",
@@ -45,74 +37,135 @@ function Generateawb() {
     description: "",
   });
 
+  const handleShipperChange = (e) => {
+    const { name, value } = e.target;
+    setShipper((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleConsigneeChange = (e) => {
+    const { name, value } = e.target;
+    setConsignee((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handlePackageChange = (e) => {
     const { name, value } = e.target;
     setPackageData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // TEMPORARY AWB GENERATION HANDLER
   const createAWB = async () => {
-    // TEMP AWB RESPONSE SIMULATING BACKEND
     const tempAwb = {
-      awbGeneration: {
-        trackingNo: "AWB123456789",
-        status: "CREATED",
-        shipper,
-        consignee,
-        packageData,
-      },
+      trackingNo: "AWB123456789",
+
+      // STEP FLAGS (important)
+      created: true,
+      emailSent: true,
+      docVerified: false, // 👈 AWB generate ke baad PENDING
+      pickupScheduled: false,
+      collected: false,
+
+      shipper,
+      consignee,
+      packageData,
     };
 
-    // Save to localStorage like real API
-    localStorage.setItem("awb", JSON.stringify(tempAwb.awbGeneration));
+    localStorage.setItem("awb", JSON.stringify(tempAwb));
 
-    // Simulate email sending response
-    const tempEmailResponse = { message: "Email Sent successfully" };
+    setAwbStatus("emailShared");
+    alert(`AWB has been generated ${tempAwb.trackingNo}`);
 
-    if (
-      tempAwb.awbGeneration.status === "CREATED" &&
-      tempEmailResponse.message === "Email Sent successfully"
-    ) {
-      setAwbStatus("emailShared");
-      alert(`AWB has been generated ${tempAwb.awbGeneration.trackingNo}`);
+    // Reset form
+    setShipper({
+      shipperName: "",
+      shipperEmail: "",
+      shipperPhone: "",
+      shipperAddressLine1: "",
+      shipperAddressLine2: "",
+      shipperCity: "",
+      shipperCountry: "",
+      shipperPostalCode: "",
+    });
 
-      // Reset form
-      setShipper({
-        shipperName: "",
-        shipperEmail: "",
-        shipperPhone: "",
-        shipperAddressLine1: "",
-        shipperAddressLine2: "",
-        shipperCity: "",
-        shipperCountry: "",
-        shipperPostalCode: "",
-      });
+    setConsignee({
+      consigneeName: "",
+      consigneeEmail: "",
+      consigneePhone: "",
+      consigneeAddressLine1: "",
+      consigneeAddressLine2: "",
+      consigneeCity: "",
+      consigneeCountry: "",
+      consigneePostalCode: "",
+    });
 
-      setConsignee({
-        consigneeName: "",
-        consigneeEmail: "",
-        consigneePhone: "",
-        consigneeAddressLine1: "",
-        consigneeAddressLine2: "",
-        consigneeCity: "",
-        consigneeCountry: "",
-        consigneePostalCode: "",
-      });
-
-      setPackageData({
-        weight: "",
-        length: "",
-        width: "",
-        height: "",
-        quantity: "",
-        description: "",
-      });
-    }
+    setPackageData({
+      weight: "",
+      length: "",
+      width: "",
+      height: "",
+      quantity: "",
+      description: "",
+    });
   };
+
+  const saveProfile = () => {
+    const profileData = {
+      shipper,
+      consignee,
+    };
+
+    localStorage.setItem("profile", JSON.stringify(profileData));
+    alert("Profile has been saved successfully!");
+  };
+
+  // Conditional rendering: show ProfilePage if showProfile is true
+  if (showProfile) {
+    return (
+      <ProfilePage
+        setShowProfile={setShowProfile}
+        setSelectedProfiles={(profiles) => {
+          profiles.forEach((p) => {
+            // Use id or future type field
+            if (p.id === 2) {
+              // Shipper
+              setShipper({
+                shipperName: p.name,
+                shipperEmail: p.email,
+                shipperPhone: p.phone,
+                shipperAddressLine1: p.addressLine1,
+                shipperAddressLine2: p.addressLine2,
+                shipperCity: p.city,
+                shipperCountry: p.country,
+                shipperPostalCode: p.postalCode,
+              });
+            } else if (p.id === 1) {
+              // Consignee
+              setConsignee({
+                consigneeName: p.name,
+                consigneeEmail: p.email,
+                consigneePhone: p.phone,
+                consigneeAddressLine1: p.addressLine1,
+                consigneeAddressLine2: p.addressLine2,
+                consigneeCity: p.city,
+                consigneeCountry: p.country,
+                consigneePostalCode: p.postalCode,
+              });
+            }
+          });
+
+          setShowProfile(false); // Close ProfilePage after selection
+        }}
+      />
+    );
+  }
 
   return (
     <div className="generate-awb-container">
       <h1>Generate AWB</h1>
+
+      {/* Add / View Profile Button */}
+      <button className="add-profile-btn" onClick={() => setShowProfile(true)}>
+        Add / View Profile
+      </button>
+
       <form className="awb-form">
         {/* Shipper Details */}
         <fieldset className="awb-fieldset">
@@ -289,7 +342,7 @@ function Generateawb() {
             onChange={handlePackageChange}
           />
 
-          <label>Quantity (kg)</label>
+          <label>Quantity</label>
           <input
             type="number"
             name="quantity"
@@ -345,9 +398,19 @@ function Generateawb() {
           ></textarea>
         </fieldset>
 
-        <button type="button" onClick={createAWB}>
-          Create AWB
-        </button>
+        <div className="form-buttons">
+          <button type="button" onClick={createAWB}>
+            Create AWB
+          </button>
+
+          <button
+            type="button"
+            onClick={saveProfile}
+            className="save-profile-btn"
+          >
+            Save Profile
+          </button>
+        </div>
       </form>
     </div>
   );

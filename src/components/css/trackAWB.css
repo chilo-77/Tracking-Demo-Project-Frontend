@@ -146,3 +146,15 @@
     width: 100%;
   }
 }
+/* Add this at the end of steps styling */
+
+.step.next .dot {
+  background-color: #facc15; /* Yellow color for next step */
+  transform: scale(1.2);
+}
+
+/* Optional: next step text can be slightly bolder */
+.step.next .step-content h4 {
+  font-weight: 600;
+  color: #f59e0b; /* optional darker yellow for title */
+}

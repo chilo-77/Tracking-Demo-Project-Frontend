@@ -4,16 +4,16 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #fefefe;
+  background-color: #fdfbff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(77, 20, 140, 0.15);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .top-bar h2 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #4d148c;
   font-size: 1.8rem;
 }
 
@@ -26,8 +26,8 @@
 
 .toggle-container button {
   padding: 0.6rem 1.2rem;
-  background-color: #f0f0f0;
-  border: 1.5px solid #ccc;
+  background-color: #f3edf9;
+  border: 1.5px solid #cbb7e2;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
@@ -35,14 +35,14 @@
 }
 
 .toggle-container button.active {
-  background-color: #4f46e5;
+  background-color: #4d148c;
   color: #fff;
-  border-color: #4f46e5;
+  border-color: #4d148c;
   transform: translateY(-1px);
 }
 
 .toggle-container button:hover:not(.active) {
-  background-color: #e0e0e0;
+  background-color: #e6dcf3;
 }
 
 .input-container {
@@ -57,7 +57,7 @@
   flex: 1;
   min-width: 200px;
   padding: 0.6rem 0.8rem;
-  border: 1.5px solid #ccc;
+  border: 1.5px solid #cbb7e2;
   border-radius: 8px;
   font-size: 0.95rem;
   transition: border 0.2s, box-shadow 0.2s;
@@ -65,13 +65,13 @@
 
 .input-box:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 6px rgba(79, 70, 229, 0.3);
+  border-color: #4d148c;
+  box-shadow: 0 0 6px rgba(77, 20, 140, 0.3);
 }
 
 .search-button {
   padding: 0.6rem 1.2rem;
-  background-color: #4f46e5;
+  background-color: #4d148c;
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
@@ -82,7 +82,7 @@
 }
 
 .search-button:hover {
-  background-color: #4338ca;
+  background-color: #3a0f6b;
   transform: translateY(-2px);
 }
 
@@ -99,7 +99,7 @@
 .next-button {
   margin-top: 1.5rem;
   padding: 0.7rem 1.5rem;
-  background-color: #16a34a;
+  background-color: #4d148c;
   color: #fff;
   font-weight: 600;
   border: none;
@@ -109,7 +109,7 @@
 }
 
 .next-button:hover {
-  background-color: #15803d;
+  background-color: #3a0f6b;
   transform: translateY(-2px);
 }
 

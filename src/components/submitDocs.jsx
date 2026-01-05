@@ -1,64 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./css/submitDocuments.css";
 
-function SubmitDocuments({ setActivePage }) {
+function SubmitDocuments() {
   const [awb, setAwb] = useState("");
-  const [date, setDate] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
   const [fromTime, setFromTime] = useState("");
   const [toTime, setToTime] = useState("");
-  const [message, setMessage] = useState("");
-  const [showTrackBtn, setShowTrackBtn] = useState(false);
 
-  // TEMP HANDLER FOR PICKUP SCHEDULING
-  const schedulePickup = async () => {
-    if (!awb || !date || !fromTime || !toTime) {
-      setMessage("Please fill all fields.");
+  const handleSchedulePickup = () => {
+    if (!awb || !pickupDate || !fromTime || !toTime) {
+      alert("Please fill AWB number and pickup time!");
       return;
     }
 
-    // TEMP RESPONSE SIMULATING BACKEND
-    const tempResponse = {
-      message: "Pickup Scheduled Successfully!",
-      awbInfo: {
-        trackingNo: awb,
-        status: "PICKUP_SCHEDULED",
-        date,
-        timeWindow: { from: fromTime, to: toTime },
-        documentsSubmitted: true, // simulate docs submitted by shipper
-      },
+    const storedAWB = JSON.parse(localStorage.getItem("awb"));
+
+    if (!storedAWB || storedAWB.trackingNo !== awb) {
+      alert("AWB not found!");
+      return;
+    }
+
+    const updatedAWB = {
+      ...storedAWB,
+      docVerified: true,
+      pickupScheduled: true,
+      collected: false,
+      pickupDate,
+      fromTime,
+      toTime,
     };
 
-    // Save to localStorage like real backend
-    localStorage.setItem("awb", JSON.stringify(tempResponse.awbInfo));
-
-    setMessage(tempResponse.message);
-    setShowTrackBtn(true);
-
-    // Reset form
-    setAwb("");
-    setDate("");
-    setFromTime("");
-    setToTime("");
+    localStorage.setItem("awb", JSON.stringify(updatedAWB));
+    alert("Pickup Scheduled successfully!");
   };
 
   return (
     <div className="schedule-pickup-page">
-      <h2>Ready for Pickup</h2>
+      <h2>Submit Documents / Schedule Pickup</h2>
 
       <div className="pickup-form">
+        <label>AWB Number</label>
         <input
           type="text"
-          placeholder="Enter AWB"
           value={awb}
+          placeholder="Enter AWB..."
           onChange={(e) => setAwb(e.target.value)}
         />
 
+        <label>Pickup Date</label>
         <input
           type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          value={pickupDate}
+          onChange={(e) => setPickupDate(e.target.value)}
         />
 
+        <label>Pickup Time Window</label>
         <div className="time-window">
           <input
             type="time"
@@ -73,15 +69,7 @@ function SubmitDocuments({ setActivePage }) {
           />
         </div>
 
-        <button onClick={schedulePickup}>Schedule Pickup</button>
-
-        {message && <p className="success-msg">{message}</p>}
-
-        {showTrackBtn && (
-          <button className="track-btn" onClick={() => setActivePage("track")}>
-            Track Shipment
-          </button>
-        )}
+        <button onClick={handleSchedulePickup}>Schedule Pickup</button>
       </div>
     </div>
   );

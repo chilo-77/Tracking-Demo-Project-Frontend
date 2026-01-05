@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import MainPage from "./mainPage";
 import Generateawb from "./generateAWB";
 import TrackAWB from "./trackAWb";
 import DocumentRequirement from "./documentReq";
 import SubmitDocuments from "./submitDocs";
-import { useState } from "react";
-import "./css/homePage.css"; // CSS file me Get Help ka style rakhenge
+import GetHelp from "./getHelp";
+import "./css/homePage.css";
 
 function HomePage() {
   const [activePage, setActivePage] = useState("dashboard");
 
   return (
     <div className="main-page">
-      {/* Top bar with title + Get Help */}
+      {/* Top bar */}
       <div className="top-bar-home">
-        <h1>Shipment Dashboard</h1>
-        <button className="get-help-button">Get Help</button>
+        <h1>RPI Dashboard</h1>
+
+        {/* ✅ Get Help button now works */}
+        <button
+          className="get-help-button"
+          onClick={() => setActivePage("gethelp")}
+        >
+          Get Help
+        </button>
       </div>
 
       {/* Page content */}
@@ -30,6 +37,7 @@ function HomePage() {
       {activePage === "generateawb" && (
         <Generateawb setActivePage={setActivePage} />
       )}
+      {activePage === "gethelp" && <GetHelp setActivePage={setActivePage} />}
 
       {/* Back button */}
       {activePage !== "dashboard" && (

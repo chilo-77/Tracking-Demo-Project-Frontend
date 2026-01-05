@@ -1,7 +1,7 @@
 /* Main page container */
 .main-page {
   font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  background: linear-gradient(135deg, #f6f0fa, #e6dbf2);
   min-height: 100vh;
   padding: 20px 40px;
   color: #333;
@@ -10,22 +10,30 @@
 /* Top bar */
 .top-bar-home {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* center the content horizontally */
   align-items: center;
-  background-color: #1e3a8a; /* Deep blue */
-  color: #fff;
+  background-color: #ffffff; /* white background instead of purple */
+  color: #000; /* black text for heading */
   padding: 20px 30px;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* subtle shadow */
+  position: relative; /* for positioning Get Help button */
 }
 
+/* Heading centered */
 .top-bar-home h1 {
   font-size: 28px;
   font-weight: 700;
+  margin: 0;
 }
 
+/* Keep Get Help button on right side */
 .get-help-button {
-  background-color: #f97316; /* Bright orange */
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #4d148c;
   color: #fff;
   border: none;
   padding: 10px 22px;
@@ -36,7 +44,7 @@
 }
 
 .get-help-button:hover {
-  background-color: #ea580c;
+  background-color: #3a0f6b;
   transform: scale(1.05);
 }
 
@@ -53,18 +61,18 @@
   background-color: #fff;
   border-radius: 12px;
   padding: 25px 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 20px rgba(77, 20, 140, 0.12);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dashboard-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 25px rgba(77, 20, 140, 0.25);
 }
 
 .dashboard-card h2 {
-  color: #1e3a8a;
+  color: #4d148c;
   font-size: 20px;
   margin-bottom: 8px;
 }
@@ -77,7 +85,7 @@
 
 /* Back button */
 .back-button {
-  background-color: #1e3a8a;
+  background-color: #4d148c;
   color: #fff;
   border: none;
   padding: 10px 18px;
@@ -89,7 +97,7 @@
 }
 
 .back-button:hover {
-  background-color: #3b82f6;
+  background-color: #3a0f6b;
   transform: scale(1.05);
 }
 

@@ -1,5 +1,5 @@
 .document-list-container {
-  background: #f7f7f7;
+  background: #f4f1fa; /* light purple background */
   padding: 20px;
   border-radius: 12px;
   margin-top: 20px;
@@ -8,7 +8,7 @@
 .doc-title {
   font-size: 1.4rem;
   margin-bottom: 16px;
-  color: #222;
+  color: #4d148c; /* FedEx purple */
   text-align: center;
 }
 
@@ -23,22 +23,28 @@
 
 .document-item {
   background: #ffffff;
-  border-left: 5px solid #1976d2;
+  border-left: 5px solid #4d148c; /* purple accent */
   padding: 14px 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(77, 20, 140, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.document-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(77, 20, 140, 0.25);
 }
 
 .document-item h4 {
   margin: 0 0 6px 0;
   font-size: 1.05rem;
-  color: #1976d2;
+  color: #5a2d82; /* softer purple */
 }
 
 .document-item p {
   margin: 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #333;
   line-height: 1.4;
 }
 

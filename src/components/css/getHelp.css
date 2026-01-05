@@ -1,0 +1,135 @@
+.get-help-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(77, 20, 140, 0.12);
+}
+
+.get-help-container h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #4d148c;
+}
+
+.get-help-container p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* ===============================
+   ISSUE OPTIONS
+================================ */
+
+.issue-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.issue-card {
+  padding: 14px;
+  border: 2px solid #d9c9ec;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #faf8ff;
+  transition: all 0.2s ease;
+}
+
+.issue-card:hover {
+  border-color: #4d148c;
+  background: #f1ebfa;
+}
+
+.issue-card.active {
+  border-color: #4d148c;
+  background: #e9ddf7;
+  font-weight: 600;
+}
+
+/* ===============================
+   FORM
+================================ */
+
+.help-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.help-form label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.help-form input,
+.help-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbb7e2;
+  font-size: 14px;
+  outline: none;
+}
+
+.help-form input:focus,
+.help-form textarea:focus {
+  border-color: #4d148c;
+  box-shadow: 0 0 5px rgba(77, 20, 140, 0.25);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.help-form button,
+.success-message button {
+  margin-top: 10px;
+  padding: 12px;
+  background: #4d148c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.help-form button:hover,
+.success-message button:hover {
+  background: #3a0f6b;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   SUCCESS MESSAGE
+================================ */
+
+.success-message {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.success-message h3 {
+  color: #4d148c;
+  margin-bottom: 10px;
+}
+
+.success-message p {
+  color: #444;
+  margin-bottom: 8px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+  .issue-options {
+    grid-template-columns: 1fr;
+  }
+}

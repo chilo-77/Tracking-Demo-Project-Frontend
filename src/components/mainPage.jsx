@@ -5,18 +5,18 @@ function MainPage({ setActivePage }) {
         className="dashboard-card"
         onClick={() => setActivePage("generateawb")}
       >
-        <h3>Generate AWB</h3>
-        <p>Generate new AWB and send demo email</p>
+        <h3>Generate RPI</h3>
+        <p>Create new RPI entry and send demo notification</p>
       </div>
 
       <div className="dashboard-card" onClick={() => setActivePage("track")}>
-        <h3>Get AWB</h3>
-        <p>Get your shipment details using AWB number</p>
+        <h3>Track RPI</h3>
+        <p>Check your RPI details using RPI number</p>
       </div>
 
       <div className="dashboard-card" onClick={() => setActivePage("docs")}>
         <h3>Document Requirement</h3>
-        <p>Check required documents for shipment</p>
+        <p>Check required documents for RPI process</p>
       </div>
     </div>
   );

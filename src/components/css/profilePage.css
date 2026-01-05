@@ -1,0 +1,72 @@
+.profile-page-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-page-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* Row Section */
+.row-section {
+  margin-bottom: 2rem;
+}
+
+.row-section h2 {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.cards-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* small screen me wrap ho jaye */
+}
+
+.profile-card {
+  flex: 1 1 300px; /* minimum 300px, expand slightly if space available */
+  max-width: 400px; /* card ko bohot bada hone se roke */
+  border: 2px solid #ddd;
+  padding: 0.8rem 1rem; /* padding thoda kam kiya */
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* shadow halka kiya */
+  cursor: pointer;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.profile-card p {
+  margin: 0.2rem 0; /* vertical spacing thoda kam kiya */
+  font-size: 0.95rem; /* thoda chhota font */
+}
+
+.profile-card.selected {
+  border-color: #4f46e5; /* purple border on selection */
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+}
+
+.confirm-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.confirm-btn {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirm-btn:hover {
+  background-color: #1976d2;
+}
