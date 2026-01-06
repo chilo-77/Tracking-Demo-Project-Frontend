@@ -93,8 +93,108 @@ button:hover {
   transform: translateY(-2px);
 }
 
+/* Shipment Nature Select */
+.awb-fieldset select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #cbb7e2;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  appearance: none;
+}
+
+.awb-fieldset select:focus {
+  outline: none;
+  border-color: #4d148c;
+  box-shadow: 0 0 6px rgba(77, 20, 140, 0.3);
+}
+
+/* B2C Individual Type Selector */
+.b2c-individual-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.b2c-individual-container label {
+  font-weight: 500;
+  color: #444;
+}
+
+.b2c-individual-container select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #cbb7e2;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+}
+
+.b2c-individual-container select:focus {
+  outline: none;
+  border-color: #4d148c;
+  box-shadow: 0 0 6px rgba(77, 20, 140, 0.3);
+}
+
+/* Optional: hide B2C individual container when not needed */
+.b2c-individual-container.hidden {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
   }
+}
+
+.schedule-later-btn {
+  padding: 0.8rem 1.5rem;
+  background-color: #6b3a9f;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-left: 0.5rem; /* thoda gap */
+}
+
+.schedule-later-btn:hover {
+  background-color: #53277d;
+  transform: translateY(-2px);
+}
+.schedule-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  border: 2px dashed #d9c9ec;
+  border-radius: 10px;
+  background-color: #faf7ff;
+}
+
+.schedule-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4d148c;
+}
+
+.schedule-box input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #cbb7e2;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.schedule-actions {
+  display: flex;
+  gap: 0.8rem;
 }

@@ -1,5 +1,7 @@
+// DocumentRequirement.jsx
 import React, { useState } from "react";
 import DisplayDoc from "./props/displayDoc";
+import AWBDetails from "./props/AWBDetails";
 import "./css/documentReq.css";
 
 function DocumentRequirement({ setActivePage }) {
@@ -8,10 +10,10 @@ function DocumentRequirement({ setActivePage }) {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [docReq, setDocReq] = useState(null);
+  const [showAWB, setShowAWB] = useState(false); // Toggle for AWB details
 
   // TEMP HANDLER FOR DOCUMENT REQUIREMENT
   const docRequest = async () => {
-    // TEMP RESPONSE SIMULATION
     const tempDocuments = [
       { name: "Invoice", required: true },
       { name: "Packing List", required: true },
@@ -27,10 +29,18 @@ function DocumentRequirement({ setActivePage }) {
       requiredDocuments: tempDocuments,
     };
 
-    // simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     setDocReq(tempResponse);
+  };
+
+  const handleDownloadAWB = () => {
+    const awbData = JSON.parse(localStorage.getItem("awb"));
+    if (!awbData) {
+      alert("No AWB found in localStorage");
+      return;
+    }
+    setShowAWB(true);
   };
 
   return (
@@ -88,15 +98,18 @@ function DocumentRequirement({ setActivePage }) {
         <button className="search-button" onClick={docRequest}>
           🔍 Check
         </button>
+
+        {/* Download AWB Button */}
+        <button className="download-awb-btn" onClick={handleDownloadAWB}>
+          ⬇️ Download / View AWB
+        </button>
       </div>
 
       {/* Results */}
       <div className="results">
-        {docReq ? (
+        {docReq && !showAWB ? (
           <>
             <DisplayDoc data={docReq} />
-
-            {/* NEXT STEP BUTTON */}
             <button
               className="next-button"
               onClick={() => setActivePage("submit")}
@@ -104,9 +117,10 @@ function DocumentRequirement({ setActivePage }) {
               Submit Documents
             </button>
           </>
-        ) : (
-          <p>Search to see required documents.</p>
-        )}
+        ) : null}
+
+        {/* AWB Details Page */}
+        {showAWB && <AWBDetails setShowAWB={setShowAWB} />}
       </div>
     </div>
   );

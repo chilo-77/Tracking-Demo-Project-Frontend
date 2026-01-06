@@ -5,6 +5,8 @@ import ProfilePage from "./profilePage"; // Profile page import
 function Generateawb() {
   const [awbStatus, setAwbStatus] = useState("");
   const [showProfile, setShowProfile] = useState(false); // For ProfilePage rendering
+  const [showSchedule, setShowSchedule] = useState(false);
+  const [scheduleDateTime, setScheduleDateTime] = useState("");
 
   const [shipper, setShipper] = useState({
     shipperName: "",
@@ -37,6 +39,11 @@ function Generateawb() {
     description: "",
   });
 
+  // NEW: Shipment Nature
+  const [shipmentNature, setShipmentNature] = useState("");
+  const [b2cIndividualType, setB2cIndividualType] = useState("");
+  const [commercialType, setCommercialType] = useState("");
+
   const handleShipperChange = (e) => {
     const { name, value } = e.target;
     setShipper((prev) => ({ ...prev, [name]: value }));
@@ -53,13 +60,21 @@ function Generateawb() {
   };
 
   const createAWB = async () => {
+    if (!shipmentNature) {
+      alert("Please select shipment nature");
+      return;
+    }
+
     const tempAwb = {
       trackingNo: "AWB123456789",
 
-      // STEP FLAGS (important)
+      // NEW: Shipment Nature
+      shipmentNature, // B2B | B2C | Personal
+
+      // STEP FLAGS
       created: true,
       emailSent: true,
-      docVerified: false, // 👈 AWB generate ke baad PENDING
+      docVerified: false,
       pickupScheduled: false,
       collected: false,
 
@@ -73,7 +88,9 @@ function Generateawb() {
     setAwbStatus("emailShared");
     alert(`AWB has been generated ${tempAwb.trackingNo}`);
 
-    // Reset form
+    // Reset
+    setShipmentNature("");
+
     setShipper({
       shipperName: "",
       shipperEmail: "",
@@ -104,6 +121,44 @@ function Generateawb() {
       quantity: "",
       description: "",
     });
+  };
+
+  const scheduleAWB = () => {
+    if (!shipmentNature) {
+      alert("Please select shipment nature");
+      return;
+    }
+
+    if (!scheduleDateTime) {
+      alert("Please select date & time");
+      return;
+    }
+
+    const scheduledAWB = {
+      trackingNo: null, // abhi generate nahi hua
+      shipmentNature,
+      b2cIndividualType,
+      commercialType,
+
+      shipper,
+      consignee,
+      packageData,
+
+      scheduledAt: scheduleDateTime,
+      status: "Scheduled",
+
+      created: false,
+      emailSent: false,
+      docVerified: false,
+      pickupScheduled: false,
+      collected: false,
+      responseFromShipper: false,
+    };
+
+    localStorage.setItem("scheduledAWB", JSON.stringify(scheduledAWB));
+
+    alert("AWB scheduled successfully!");
+    setShowSchedule(false);
   };
 
   const saveProfile = () => {
@@ -332,6 +387,59 @@ function Generateawb() {
         <fieldset className="awb-fieldset">
           <legend>Package Details</legend>
 
+          {/* Shipment Nature */}
+          <label>Shipment Nature</label>
+          <select
+            value={shipmentNature}
+            onChange={(e) => {
+              setShipmentNature(e.target.value);
+              setB2cIndividualType("");
+              setCommercialType("");
+            }}
+            required
+          >
+            <option value="">Select</option>
+            <option value="B2B">B2B (Company → Company)</option>
+            <option value="B2C">B2C (Company ↔ Individual)</option>
+            <option value="Personal">Personal (Non-Commercial)</option>
+          </select>
+
+          {/* B2C Expansion */}
+          {shipmentNature === "B2C" && (
+            <div className="b2c-individual-container">
+              <label>Who is the Individual?</label>
+              <select
+                value={b2cIndividualType}
+                onChange={(e) => setB2cIndividualType(e.target.value)}
+                required
+              >
+                <option value="">Select</option>
+                <option value="Receiver">Receiver (Individual Customer)</option>
+                <option value="Shipper">Shipper (Individual Sender)</option>
+              </select>
+            </div>
+          )}
+
+          {/* Commercial Type (Only if not Personal) */}
+          {shipmentNature !== "Personal" && (
+            <>
+              <label>Shipment Purpose</label>
+              <select
+                value={commercialType}
+                onChange={(e) => setCommercialType(e.target.value)}
+                required
+              >
+                <option value="">Select</option>
+                <option value="Sale">Sale (Commercial Invoice)</option>
+                <option value="Sample">Sample (Proforma Invoice)</option>
+                <option value="NonCommercial">
+                  Non-Commercial (No Sale Value)
+                </option>
+              </select>
+            </>
+          )}
+
+          {/* Weight */}
           <label>Weight (kg)</label>
           <input
             type="number"
@@ -342,16 +450,18 @@ function Generateawb() {
             onChange={handlePackageChange}
           />
 
+          {/* Quantity */}
           <label>Quantity</label>
           <input
             type="number"
             name="quantity"
-            step="0.01"
+            step="1"
             required
             value={packageData.quantity}
             onChange={handlePackageChange}
           />
 
+          {/* Dimensions */}
           <div className="form-row">
             <div>
               <label>Length (cm)</label>
@@ -364,6 +474,7 @@ function Generateawb() {
                 onChange={handlePackageChange}
               />
             </div>
+
             <div>
               <label>Width (cm)</label>
               <input
@@ -375,6 +486,7 @@ function Generateawb() {
                 onChange={handlePackageChange}
               />
             </div>
+
             <div>
               <label>Height (cm)</label>
               <input
@@ -388,6 +500,7 @@ function Generateawb() {
             </div>
           </div>
 
+          {/* Content */}
           <label>Content Description</label>
           <textarea
             name="description"
@@ -395,7 +508,7 @@ function Generateawb() {
             required
             value={packageData.description}
             onChange={handlePackageChange}
-          ></textarea>
+          />
         </fieldset>
 
         <div className="form-buttons">
@@ -410,7 +523,36 @@ function Generateawb() {
           >
             Save Profile
           </button>
+
+          <button
+            type="button"
+            onClick={() => setShowSchedule(true)}
+            className="schedule-later-btn"
+          >
+            Schedule for Later
+          </button>
         </div>
+        {showSchedule && (
+          <div className="schedule-box">
+            <label>Schedule AWB Generation</label>
+
+            <input
+              type="datetime-local"
+              value={scheduleDateTime}
+              onChange={(e) => setScheduleDateTime(e.target.value)}
+            />
+
+            <div className="schedule-actions">
+              <button type="button" onClick={scheduleAWB}>
+                Confirm Schedule
+              </button>
+
+              <button type="button" onClick={() => setShowSchedule(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );

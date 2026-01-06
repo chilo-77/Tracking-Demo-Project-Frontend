@@ -130,3 +130,46 @@
     width: 100%;
   }
 }
+
+/* AWB download & edit */
+.download-awb-btn {
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  background-color: #4d148c;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.awb-details-page {
+  background-color: #f9f5ff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #d9c9ec;
+  margin-top: 1rem;
+}
+
+.awb-details-page h3 {
+  color: #4d148c;
+  text-align: center;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4d148c;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.form-buttons button:hover {
+  background-color: #3a0f6b;
+}

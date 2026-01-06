@@ -5,6 +5,7 @@ import TrackAWB from "./trackAWb";
 import DocumentRequirement from "./documentReq";
 import SubmitDocuments from "./submitDocs";
 import GetHelp from "./getHelp";
+import VerifyShipment from "./verifyShipment";
 import "./css/homePage.css";
 
 function HomePage() {
@@ -24,7 +25,6 @@ function HomePage() {
           Get Help
         </button>
       </div>
-
       {/* Page content */}
       {activePage === "dashboard" && <MainPage setActivePage={setActivePage} />}
       {activePage === "track" && <TrackAWB setActivePage={setActivePage} />}
@@ -38,7 +38,7 @@ function HomePage() {
         <Generateawb setActivePage={setActivePage} />
       )}
       {activePage === "gethelp" && <GetHelp setActivePage={setActivePage} />}
-
+      {activePage === "verifyShipment" && <VerifyShipment />}{" "}
       {/* Back button */}
       {activePage !== "dashboard" && (
         <button

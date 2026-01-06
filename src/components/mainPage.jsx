@@ -14,6 +14,17 @@ function MainPage({ setActivePage }) {
         <p>Check your RPI details using RPI number</p>
       </div>
 
+      <div
+        className="dashboard-card"
+        onClick={() => setActivePage("verifyShipment")}
+      >
+        <h3>Verify Shipment</h3>
+        <p>
+          Confirm shipment awareness and verify details before submitting the
+          documents
+        </p>
+      </div>
+
       <div className="dashboard-card" onClick={() => setActivePage("docs")}>
         <h3>Document Requirement</h3>
         <p>Check required documents for RPI process</p>
