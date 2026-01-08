@@ -15,7 +15,7 @@ function HomePage() {
     <div className="main-page">
       {/* Top bar */}
       <div className="top-bar-home">
-        <h1>RPI Dashboard</h1>
+        <h1>Remote Pickup Inquiry Dashboard</h1>
 
         {/* ✅ Get Help button now works */}
         <button

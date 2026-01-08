@@ -5,13 +5,18 @@ function MainPage({ setActivePage }) {
         className="dashboard-card"
         onClick={() => setActivePage("generateawb")}
       >
-        <h3>Generate RPI</h3>
+        <h3>Create a Shipment</h3>
         <p>Create new RPI entry and send demo notification</p>
       </div>
 
       <div className="dashboard-card" onClick={() => setActivePage("track")}>
-        <h3>Track RPI</h3>
+        <h3>Track Shipment</h3>
         <p>Check your RPI details using RPI number</p>
+      </div>
+
+      <div className="dashboard-card" onClick={() => setActivePage("docs")}>
+        <h3>Document Requirement</h3>
+        <p>Check required documents for RPI process</p>
       </div>
 
       <div
@@ -23,11 +28,6 @@ function MainPage({ setActivePage }) {
           Confirm shipment awareness and verify details before submitting the
           documents
         </p>
-      </div>
-
-      <div className="dashboard-card" onClick={() => setActivePage("docs")}>
-        <h3>Document Requirement</h3>
-        <p>Check required documents for RPI process</p>
       </div>
     </div>
   );
